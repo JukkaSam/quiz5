@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Quiz Datacenter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+            color: #00ff41;
+            font-family: 'Orbitron', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* SCANLINES */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,255,65,0.03) 2px,
+                rgba(0,255,65,0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1, h2 {
+            font-weight: 900;
+            text-shadow: 0 0 20px #00ff41, 0 0 40px #00ff41;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .header {
+            text-align: center;
+            border: 2px solid #00ff41;
+            padding: 2rem;
+            border-radius: 10px;
+            background: rgba(0,255,65,0.1);
+            box-shadow: 0 0 50px rgba(0,255,65,0.5);
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            border: none;
+            color: #0a0a0f;
+            padding: 12px 24px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(0,255,65,0.5);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            box-shadow: 0 0 40px rgba(0,255,65,0.8);
+            transform: translateY(-2px);
+            background: linear-gradient(45deg, #00cc33, #00ff41);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #00ff88;
+            font-weight: 700;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #00ff41;
+            background: rgba(0,255,65,0.1);
+            color: #00ff41;
+            font-family: 'Orbitron', monospace;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(0,255,65,0.5);
+            border-color: #00cc33;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0,255,65,0.1);
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0,255,65,0.3);
+        }
+        
+        th {
+            background: rgba(0,255,65,0.2);
+            font-weight: 900;
+            text-shadow: 0 0 10px #00ff41;
+        }
+        
+        tr:hover {
+            background: rgba(0,255,65,0.2);
+        }
+        
+        .correct { color: #00ff41; text-shadow: 0 0 10px #00ff41; }
+        .wrong { color: #ff4444; text-shadow: 0 0 10px #ff4444; }
+        
+        .nav {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .nav a {
+            color: #00ff88;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px #00ff41;
+        }
+        
+        .nav a:hover {
+            color: #00ff41;
+            text-shadow: 0 0 20px #00ff41;
+        }
+        
+        .status {
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .active { background: rgba(0,255,65,0.2); border: 2px solid #00ff41; }
+        .inactive { background: rgba(255,68,68,0.2); border: 2px solid #ff4444; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% block header %}
+        <div class="header">
+            <h1>🖥️ QUIZ DATACENTER</h1>
+            <p>Sistema de preguntas semanales - IBM Madrid</p>
+        </div>
+        {% endblock %}
+        
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
