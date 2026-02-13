@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Crear ronda</title>
+</head>
+<body>
+  <h1>Crear nueva ronda</h1>
+  <a href="{{ url_for('dashboard') }}">Volver</a>
+
+  <form method="post">
+    <label>Semana nº:</label>
+    <input type="number" name="week_number" required>
+    <h2>Pregunta 1</h2>
+    <input type="text" name="q1" placeholder="Pregunta 1" required>
+    <input type="text" name="a1" placeholder="Respuesta correcta 1" required>
+
+    <h2>Pregunta 2</h2>
+    <input type="text" name="q2" placeholder="Pregunta 2" required>
+    <input type="text" name="a2" placeholder="Respuesta correcta 2" required>
+
+    <h2>Pregunta 3</h2>
+    <input type="text" name="q3" placeholder="Pregunta 3" required>
+    <input type="text" name="a3" placeholder="Respuesta correcta 3" required>
+
+    <br><br>
+    <button type="submit">Crear ronda</button>
+  </form>
+</body>
+</html>

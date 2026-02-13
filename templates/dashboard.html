@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard</title>
+</head>
+<body>
+  <h1>Hola, {{ user.username }}</h1>
+  <a href="{{ url_for('logout') }}">Logout</a>
+
+  <h2>Ronda actual</h2>
+  {% if current_round %}
+    <p>Semana {{ current_round['week_number'] }} (ID ronda {{ current_round['id'] }})</p>
+    <a href="{{ url_for('answer_round', round_id=current_round['id']) }}">Responder ronda</a>
+    <br>
+    <a href="{{ url_for('round_results', round_id=current_round['id']) }}">Ver resultados</a>
+  {% else %}
+    <p>No hay ronda activa.</p>
+  {% endif %}
+
+  <h2>Crear nueva ronda (solo autor de la semana)</h2>
+  <a href="{{ url_for('create_round') }}">Crear ronda</a>
+
+  <h2>Ranking</h2>
+  <table border="1">
+    <tr><th>Usuario</th><th>Puntos</th></tr>
+    {% for r in ranking %}
+      <tr>
+        <td>{{ r['username'] }}</td>
+        <td>{{ r['total_points'] }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

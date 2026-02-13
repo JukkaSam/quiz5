@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Responder ronda</title>
+</head>
+<body>
+  <h1>Responder ronda {{ round_row['week_number'] }}</h1>
+  <a href="{{ url_for('dashboard') }}">Volver</a>
+
+  <form method="post">
+    {% for q in questions %}
+      <h2>Pregunta {{ loop.index }}</h2>
+      <p>{{ q['text'] }}</p>
+      <input type="text" name="q{{ q['id'] }}" required>
+    {% endfor %}
+    <br>
+    <button type="submit">Enviar respuestas</button>
+  </form>
+</body>
+</html>

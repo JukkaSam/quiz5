@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Resultados ronda</title>
+</head>
+<body>
+  <h1>Resultados ronda</h1>
+  <a href="{{ url_for('dashboard') }}">Volver</a>
+
+  <table border="1">
+    <tr>
+      <th>Usuario</th>
+      <th>Pregunta</th>
+      <th>Respuesta</th>
+      <th>Correcta</th>
+    </tr>
+    {% for r in results %}
+      <tr>
+        <td>{{ r['username'] }}</td>
+        <td>{{ r['question_text'] }}</td>
+        <td>{{ r['answer_text'] }}</td>
+        <td>{{ "Sí" if r['is_correct'] else "No" }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
