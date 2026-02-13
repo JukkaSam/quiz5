@@ -1,35 +1,37 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Dashboard</title>
-</head>
-<body>
-  <h1>Hola, {{ user.username }}</h1>
-  <a href="{{ url_for('logout') }}">Logout</a>
+{% extends "base.html" %}
 
-  <h2>Ronda actual</h2>
-  {% if current_round %}
-    <p>Semana {{ current_round['week_number'] }} (ID ronda {{ current_round['id'] }})</p>
-    <a href="{{ url_for('answer_round', round_id=current_round['id']) }}">Responder ronda</a>
-    <br>
-    <a href="{{ url_for('round_results', round_id=current_round['id']) }}">Ver resultados</a>
-  {% else %}
-    <p>No hay ronda activa.</p>
-  {% endif %}
+{% block content %}
+<div class="nav">
+    <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
+    <a href="{{ url_for('logout') }}">🚪 Logout</a>
+</div>
 
-  <h2>Crear nueva ronda (solo autor de la semana)</h2>
-  <a href="{{ url_for('create_round') }}">Crear ronda</a>
+<h2>👋 Hola, <span style="color: #00ff88;">{{ user.username }}</span></h2>
 
-  <h2>Ranking</h2>
-  <table border="1">
-    <tr><th>Usuario</th><th>Puntos</th></tr>
-    {% for r in ranking %}
-      <tr>
-        <td>{{ r['username'] }}</td>
-        <td>{{ r['total_points'] }}</td>
-      </tr>
+<h3>📊 Ronda actual</h3>
+{% if current_round %}
+<div class="status active">
+    Semana {{ current_round.week_number }} (ID: {{ current_round.id }})<br>
+    Autor: {{ current_round.author_username }}
+</div>
+<a href="{{ url_for('answer_round', round_id=current_round.id) }}" class="btn">📝 Responder</a>
+<a href="{{ url_for('round_results', round_id=current_round.id) }}" class="btn">📈 Resultados</a>
+{% else %}
+<div class="status inactive">No hay ronda activa</div>
+{% endif %}
+
+<h3>➕ Crear nueva ronda</h3>
+<a href="{{ url_for('create_round') }}" class="btn">🆕 Nueva ronda</a>
+
+<h3>🏆 RANKING GLOBAL</h3>
+<table>
+    <tr><th>#</th><th>Usuario</th><th>Puntos</th></tr>
+    {% for i, r in ranking|enumerate(start=1) %}
+    <tr>
+        <td>{{ i }}</td>
+        <td>{{ r.username }}</td>
+        <td style="color: #00ff88; font-weight: bold;">{{ r.total_points }}</td>
+    </tr>
     {% endfor %}
-  </table>
-</body>
-</html>
+</table>
+{% endblock %}
